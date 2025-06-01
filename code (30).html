@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 Ovia - Period Tracker</title>
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiT3ZpYSBQZXJpb2QgVHJhY2tlciIsInNob3J0X25hbWUiOiJPdmlhIiwic3RhcnRfdXJsIjoiLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmZmY1ZjgiLCJ0aGVtZV9jb2xvciI6IiNlYzQ4OTkiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCM2FXUjBhRDBpTWpRd0lpQm9aV2xuYUhROUlqSTBNQ0lpSUhabGNuTnBiMjQ5SWpFdU1TQXhJREUwTGpNaUlIaHRiRzV6UFNKb2RIUndPaTh2ZDNkM0xuY3pMbTl5Wnk4eU1EQXdMM04yWnlJK1BHUmxabk0rUEd4cGJtVmhja2R5WVdScFpXNTBJR2xrUFNKblpYNGlJSGd4UFNJd0ppQjVNVDBpTkRsOGZEUjROeUlpSUhneFBTSTRNUzQ1SWlCNU1UMGlNelJjZERNeElpQm5jbUZrYVdWdWRGVnVhWFJ6UFNKMWMyVnlVM0JoWTJWUGJsVnpaU0krUEhOMGIzQWdiMlptYzJWMFBTSXdKU0lnYzNSdmNDMWpiMnh2Y2owaVhDTXpObU5tTTJZaUx6NDhjM1J2Y0NCdlptWnpaWFE5SWpVd0pTSWdjM1J2Y0MxamIyeHZjajBpWEZNek4yTXpObVl6WmlJdlBqeHpkRzl3SUc5bVpuTmxkRDBpTVRBd0pTSWdjM1J2Y0MxamIyeHZjajBpWEZNek4yTXpObVl6WmlJdlBqd3ZiR2x1WldGeVIzSmhaR2xsYm5RK1BISmxZM1FnZUQwaU1qa2lJSGs5SWpFeElpQjNhV1IwYUQwaU1UZ3lJaUJvWldsbmFIUTlJakkxSWlCeWVEMGlNVElpSUdacGJHdzlJblZ5YkNobkkyY3BJaTgrUEhKbFkzUWdlRDBpTWpraUlIazlJak0zSWlCM2FXUjBhRDBpTVRneUlpQm9aV2xuYUhROUlqRTVJaUJ5ZUQwaU1USWlJR1pwYkd3OUluVnliQ2huSWpGblltUXBJaTgrUEhKbFkzUWdlRDBpTWpraUlIazlJalUySWlCM2FXUjBhRDBpTVRneUlpQm9aV2xuYUhROUlqRTVJaUJ5ZUQwaU1USWlJR1pwYkd3OUluVnliQ2duSWpGblltUXBJaTgrUEhKbFkzUWdlRDBpTWpraUlIazlJamMxSWlCM2FXUjBhRDBpTVRneUlpQm9aV2xuYUhROUlqRTVJaUJ5ZUQwaU1USWlJR1pwYkd3OUluVnliQ2duSWpGblltUXBJaTgrUEhKbFkzUWdlRDBpTWpraUlIazlJamswSWlCM2FXUjBhRDBpTVRneUlpQm9aV2xuYUhROUlqRTVJaUJ5ZUQwaU1USWlJR1pwYkd3OUluVnliQ2duSWpGblltUXBJaTgrUEhKbFkzUWdlRDBpTWpraUlIazlJakV4TXlJZ2QybGtkR2c5SWpFNE1pSWdhR1ZwWjJoMFBTSXhPU0lnY25nOUlqRXlJaUJtYVd4c1BTSjFjbXdvWjJjeVoySmtLU0l2UGp3dmMyWm5QZz09Iiwic2l6ZXMiOiIyNDB4MjQwIiwidHlwZSI6ImltYWdlL3N2Zyt4bWwifV19">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='12' y='16' font-size='16' text-anchor='middle' fill='%23ec4899'%3E🌸%3C/text%3E%3C/svg%3E">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #ec4899; --primary-light: #f9a8d4; --primary-dark: #be185d;
+            --secondary: #8b5cf6; --background: #fff5f8; --surface: #ffffff;
+            --text: #1f2937; --text-light: #6b7280; --border: #e5e7eb;
+            --success: #10b981; --warning: #f59e0b; --error: #ef4444; --shadow: rgba(0, 0, 0, 0.1);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--background) 0%, #fef7ff 100%);
+            color: var(--text); line-height: 1.6; min-height: 100vh;
+        }
+        .app { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; padding: 20px; background: var(--surface); border-radius: 20px; box-shadow: 0 10px 30px var(--shadow); }
+        .header h1 { font-size: 2.5rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        .header p { color: var(--text-light); }
+        .auth-section, .main-app { background: var(--surface); border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px var(--shadow); margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text); }
+        .form-control { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: 12px; font-size: 16px; transition: all 0.3s ease; background: var(--surface); }
+        .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1); }
+        .btn { padding: 12px 24px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(236, 72, 153, 0.3); }
+        .btn-secondary { background: var(--border); color: var(--text); }
+        .btn-secondary:hover { background: var(--text-light); color: white; }
+        .btn-danger { background: var(--error); color: white; }
+        .btn-danger:hover { background: #dc2626; transform: translateY(-2px); }
+        .tabs { display: flex; background: var(--background); border-radius: 12px; padding: 4px; margin-bottom: 20px; overflow-x: auto; }
+        .tab { flex: 1; padding: 12px 16px; text-align: center; background: transparent; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; font-weight: 500; }
+        .tab.active { background: var(--primary); color: white; }
+        .tab:not(.active):hover { background: rgba(236, 72, 153, 0.1); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 20px; }
+        .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .calendar-nav { background: none; border: none; font-size: 18px; cursor: pointer; padding: 8px; border-radius: 8px; transition: background 0.3s ease; }
+        .calendar-nav:hover { background: var(--border); }
+        .day-header { text-align: center; font-weight: 600; padding: 12px 8px; color: var(--text-light); font-size: 14px; }
+        .day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; position: relative; font-weight: 500; border: 2px solid transparent; }
+        .day:hover { background: rgba(236, 72, 153, 0.1); }
+        .day.other-month { color: var(--text-light); opacity: 0.5; }
+        .day.today { border-color: var(--primary); font-weight: 700; }
+        .day.selected-date { box-shadow: 0 0 0 2px var(--secondary) inset; font-weight: bold; }
+        .day.period { background: var(--primary); color: white; }
+        .day.ovulation { background: var(--secondary); color: white; }
+        .day.fertile { background: var(--primary-light); color: var(--primary-dark); }
+        .day.predicted { background: linear-gradient(45deg, var(--primary-light) 50%, transparent 50%); border-color: var(--primary-light); opacity: 0.8; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { padding: 20px; background: linear-gradient(135deg, var(--primary-light), var(--primary)); border-radius: 16px; color: white; text-align: center; }
+        .stat-card .stat-value { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
+        .stat-label { font-size: 14px; opacity: 0.9; }
+        .symptom-log { display: grid; gap: 20px; }
+        .symptom-group { padding: 20px; background: var(--background); border-radius: 12px; }
+        .symptom-options { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .symptom-option { padding: 8px 16px; border: 2px solid var(--border); border-radius: 20px; cursor: pointer; transition: all 0.3s ease; font-size: 14px; }
+        .symptom-option.selected { background: var(--primary); color: white; border-color: var(--primary); }
+        .chart-container { background: var(--surface); padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 5px 15px var(--shadow); min-height: 250px; }
+        #cycleChartNoData { text-align: center; padding: 20px; display: none; color: var(--text-light); }
+        .notification { position: fixed; top: 20px; right: 20px; padding: 16px 20px; background: var(--surface); border-radius: 12px; box-shadow: 0 10px 30px var(--shadow); border-left: 4px solid var(--primary); z-index: 1000; transform: translateX(calc(100% + 20px)); transition: transform 0.4s ease-in-out; max-width: 300px; }
+        .notification.show { transform: translateX(0); }
+        .data-management { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .hidden { display: none !important; }
+        .flow-scale { display: flex; justify-content: space-between; margin-top: 10px; }
+        .flow-option { flex: 1; text-align: center; padding: 10px; border: 2px solid var(--border); cursor: pointer; transition: all 0.3s ease; margin: 0 2px; border-radius: 8px; }
+        .flow-option.selected { background: var(--primary); color: white; border-color: var(--primary); }
+        .auth-section .form-group.hidden-for-login { display: none; } /* For hiding setup fields during login */
+        @media (max-width: 768px) {
+            .app { padding: 10px; } .header h1 { font-size: 2rem; }
+            .auth-section, .main-app { padding: 20px; } .stats-grid { grid-template-columns: 1fr; }
+            .stat-card .stat-value { font-size: 1.6rem; } .tabs { overflow-x: auto; }
+            .data-management { flex-direction: column; }
+            .notification { right: 10px; left: 10px; top: 10px; max-width: calc(100% - 20px); transform: translateY(calc(-100% - 20px)); }
+            .notification.show { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <h1>🌸 Ovia</h1>
+            <p data-lang-key="appSubtitle">Your personal period tracking companion</p>
+        </div>
+
+        <div id="authSection" class="auth-section">
+            <h2 data-lang-key="welcomeToOvia">Welcome to Ovia</h2>
+            <p id="authIntroP" data-lang-key="setupIntro">If you are a new user, please set up your details. If returning, please enter your password to login.</p>
+            <div class="form-group">
+                <label for="password" data-lang-key="enterPasswordLabel">Set/Enter Your Password</label>
+                <input type="password" id="password" class="form-control" data-lang-placeholder-key="passwordPlaceholder" placeholder="Enter your password">
+            </div>
+            <div class="form-group" id="lastPeriodGroup">
+                <label for="lastPeriod" data-lang-key="lastPeriodLabel">Last Period Start Date</label>
+                <input type="date" id="lastPeriod" class="form-control">
+            </div>
+            <div class="form-group" id="cycleLengthGroup">
+                <label for="cycleLength" data-lang-key="cycleLengthLabel">Typical Cycle Length (days)</label>
+                <input type="number" id="cycleLength" class="form-control" value="28" min="15" max="60">
+            </div>
+            <div class="form-group" id="periodDurationGroup">
+                <label for="periodDuration" data-lang-key="periodDurationLabel">Typical Period Duration (days)</label>
+                <input type="number" id="periodDuration" class="form-control" value="5" min="1" max="15">
+            </div>
+            <button id="authButton" onclick="handleAuth()" class="btn btn-primary" data-lang-key="startTrackingSetupButton">Start Tracking / Setup</button>
+        </div>
+
+        <div id="mainApp" class="main-app hidden">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('calendar', event)" data-lang-key="calendarTab">📅 Calendar</button>
+                <button class="tab" onclick="showTab('symptoms', event)" data-lang-key="symptomsTab">📝 Symptoms</button>
+                <button class="tab" onclick="showTab('insights', event)" data-lang-key="insightsTab">📊 Insights</button>
+                <button class="tab" onclick="showTab('settings', event)" data-lang-key="settingsTab">⚙️ Settings</button>
+            </div>
+
+            <div id="calendar" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="nextPeriodDays">-</div>
+                        <div class="stat-label" data-lang-key="daysUntilNextPeriod">Days until next period</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="cycleDay">-</div>
+                        <div class="stat-label" data-lang-key="currentCycleDay">Current cycle day</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgCycle">-</div>
+                        <div class="stat-label" data-lang-key="avgCycleLengthCalendar">Average cycle length</div>
+                    </div>
+                </div>
+                <div class="calendar-header">
+                    <button class="calendar-nav" onclick="previousMonth()">‹</button>
+                    <h3 id="currentMonth"></h3>
+                    <button class="calendar-nav" onclick="nextMonth()">›</button>
+                </div>
+                <div class="calendar" id="calendarGrid"></div>
+                <div style="margin-top: 20px;">
+                    <h4 data-lang-key="legendTitle">Legend</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px;">
+                        <span style="display: flex; align-items: center; gap: 5px;"><div style="width: 20px; height: 20px; background: var(--primary); border-radius: 50%;"></div><span data-lang-key="periodLegend">Period</span></span>
+                        <span style="display: flex; align-items: center; gap: 5px;"><div style="width: 20px; height: 20px; background: var(--secondary); border-radius: 50%;"></div><span data-lang-key="ovulationLegend">Ovulation</span></span>
+                        <span style="display: flex; align-items: center; gap: 5px;"><div style="width: 20px; height: 20px; background: var(--primary-light); border-radius: 50%;"></div><span data-lang-key="fertileWindowLegend">Fertile Window</span></span>
+                        <span style="display: flex; align-items: center; gap: 5px;"><div style="width: 20px; height: 20px; background: linear-gradient(45deg, var(--primary-light) 50%, transparent 50%); border: 1px solid var(--primary-light); border-radius: 50%;"></div><span data-lang-key="predictedPeriodLegend">Predicted Period</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="symptoms" class="tab-content">
+                <h3><span data-lang-key="logSymptomsFor">Log Symptoms for</span> <span id="symptomDateDisplay"></span></h3>
+                <div class="symptom-log">
+                    <div class="symptom-group" data-symptom-category="flow">
+                        <h4 data-lang-key="flowSymptom">Flow</h4>
+                        <div class="flow-scale">
+                            <div class="flow-option" data-value="none" onclick="selectFlow('none', this)" data-lang-key="noneFlow">None</div>
+                            <div class="flow-option" data-value="spotting" onclick="selectFlow('spotting', this)" data-lang-key="spottingFlow">Spotting</div>
+                            <div class="flow-option" data-value="light" onclick="selectFlow('light', this)" data-lang-key="lightFlow">Light</div>
+                            <div class="flow-option" data-value="medium" onclick="selectFlow('medium', this)" data-lang-key="mediumFlow">Medium</div>
+                            <div class="flow-option" data-value="heavy" onclick="selectFlow('heavy', this)" data-lang-key="heavyFlow">Heavy</div>
+                        </div>
+                    </div>
+                    <div class="symptom-group" data-symptom-category="mood">
+                        <h4 data-lang-key="moodSymptom">Mood</h4>
+                        <div class="symptom-options">
+                            <div class="symptom-option" data-value="happy" onclick="toggleSymptom(this)" data-lang-key="happyMood">😊 Happy</div>
+                            <div class="symptom-option" data-value="sad" onclick="toggleSymptom(this)" data-lang-key="sadMood">😢 Sad</div>
+                            <div class="symptom-option" data-value="irritated" onclick="toggleSymptom(this)" data-lang-key="irritatedMood">😤 Irritated</div>
+                            <div class="symptom-option" data-value="anxious" onclick="toggleSymptom(this)" data-lang-key="anxiousMood">😰 Anxious</div>
+                            <div class="symptom-option" data-value="emotional" onclick="toggleSymptom(this)" data-lang-key="emotionalMood">😭 Emotional</div>
+                            <div class="symptom-option" data-value="calm" onclick="toggleSymptom(this)" data-lang-key="calmMood">😌 Calm</div>
+                            <div class="symptom-option" data-value="energetic" onclick="toggleSymptom(this)" data-lang-key="energeticMood">⚡ Energetic</div>
+                        </div>
+                    </div>
+                    <div class="symptom-group" data-symptom-category="physical">
+                        <h4 data-lang-key="physicalSymptoms">Physical Symptoms</h4>
+                        <div class="symptom-options">
+                            <div class="symptom-option" data-value="cramps" onclick="toggleSymptom(this)" data-lang-key="crampsPhysical">🤕 Cramps</div>
+                            <div class="symptom-option" data-value="bloating" onclick="toggleSymptom(this)" data-lang-key="bloatingPhysical">🎈 Bloating</div>
+                            <div class="symptom-option" data-value="headache" onclick="toggleSymptom(this)" data-lang-key="headachePhysical">🤯 Headache</div>
+                             <div class="symptom-option" data-value="backache" onclick="toggleSymptom(this)" data-lang-key="backachePhysical">🔥 Back Pain</div>
+                            <div class="symptom-option" data-value="tender" onclick="toggleSymptom(this)" data-lang-key="tenderPhysical">💔 Breast Tenderness</div>
+                            <div class="symptom-option" data-value="fatigue" onclick="toggleSymptom(this)" data-lang-key="fatiguePhysical">😴 Fatigue</div>
+                            <div class="symptom-option" data-value="nausea" onclick="toggleSymptom(this)" data-lang-key="nauseaPhysical">🤢 Nausea</div>
+                            <div class="symptom-option" data-value="acne" onclick="toggleSymptom(this)" data-lang-key="acnePhysical">痘 Acne</div>
+                        </div>
+                    </div>
+                    <div class="symptom-group" data-symptom-category="discharge">
+                        <h4 data-lang-key="dischargeSymptom">Discharge</h4>
+                        <div class="symptom-options">
+                            <div class="symptom-option" data-value="none" onclick="toggleSymptom(this)" data-lang-key="noneDischarge">None</div>
+                            <div class="symptom-option" data-value="dry" onclick="toggleSymptom(this)" data-lang-key="dryDischarge">Dry</div>
+                            <div class="symptom-option" data-value="sticky" onclick="toggleSymptom(this)" data-lang-key="stickyDischarge">Sticky</div>
+                            <div class="symptom-option" data-value="creamy" onclick="toggleSymptom(this)" data-lang-key="creamyDischarge">Creamy</div>
+                            <div class="symptom-option" data-value="watery" onclick="toggleSymptom(this)" data-lang-key="wateryDischarge">Watery</div>
+                            <div class="symptom-option" data-value="egg-white" onclick="toggleSymptom(this)" data-lang-key="eggWhiteDischarge">Egg White</div>
+                        </div>
+                    </div>
+                    <div class="symptom-group">
+                        <h4 data-lang-key="notesSymptom">Notes</h4>
+                        <textarea id="notesInput" class="form-control" rows="3" data-lang-placeholder-key="notesPlaceholder" placeholder="Any additional notes for this day..."></textarea>
+                    </div>
+                </div>
+                <button onclick="saveSymptoms()" class="btn btn-primary" style="margin-top: 20px;"><span data-lang-key="saveDataFor">Save Data for</span> <span id="saveButtonDateDisplay"></span></button>
+            </div>
+
+            <div id="insights" class="tab-content">
+                <h3 data-lang-key="yourCycleInsights">Your Cycle Insights</h3>
+                <div class="chart-container">
+                    <h4 data-lang-key="cycleLengthTrends">Cycle Length Trends</h4>
+                    <canvas id="cycleChart" width="400" height="200"></canvas>
+                    <div id="cycleChartNoData" style="text-align: center; padding: 20px; display: none; color: var(--text-light);" data-lang-key="chartNoDataDefault">
+                        Not enough cycle data to display chart. Track at least two full cycles for a trend.
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgCycleInsight">28 days (default)</div>
+                        <div class="stat-label" data-lang-key="cycleLengthInfoLabel">Cycle Length Info</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgPeriodInsight">5 days (default)</div>
+                        <div class="stat-label" data-lang-key="periodLengthInfoLabel">Period Length Info</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalCycles">0</div>
+                        <div class="stat-label" data-lang-key="totalCyclesTracked">Total Cycles Tracked</div>
+                    </div>
+                </div>
+                <div id="predictions" style="margin-top: 30px;">
+                    <h4 data-lang-key="predictionsTitle">Predictions</h4>
+                    <div style="background: var(--background); padding: 20px; border-radius: 12px;">
+                        <p><strong data-lang-key="nextPeriodPrediction">Next Period:</strong> <span id="nextPeriodDate">-</span></p>
+                        <p><strong data-lang-key="nextOvulationPrediction">Next Ovulation:</strong> <span id="nextOvulationDate">-</span></p>
+                        <p><strong data-lang-key="fertileWindowPrediction">Fertile Window:</strong> <span id="fertileWindow">-</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="settings" class="tab-content">
+                <h3 data-lang-key="settingsTitle">Settings & Data Management</h3>
+                <div class="form-group">
+                    <label for="languageSelect" data-lang-key="languageSelectLabel">Select Language:</label>
+                    <select id="languageSelect" class="form-control" onchange="changeLanguage(this.value)">
+                        <option value="en">English</option>
+                        <option value="fr">Français (French)</option>
+                        <option value="ar">العربية (Arabic)</option>
+                        <option value="es">Español (Spanish)</option>
+                        <option value="zh">中文 (Mandarin)</option>
+                        <option value="ja">日本語 (Japanese)</option>
+                        <option value="ru">Русский (Russian)</option>
+                        <option value="pt">Português (Portuguese)</option>
+                        <option value="de">Deutsch (German)</option>
+                        <option value="it">Italiano (Italian)</option>
+                        <option value="ta">தமிழ் (Tamil)</option>
+                        <option value="te">తెలుగు (Telugu)</option>
+                        <option value="kn">ಕನ್ನಡ (Kannada)</option>
+                        <option value="ml">മലയാളം (Malayalam)</option>
+                        <option value="hi">हिन्दी (Hindi)</option>
+                        <option value="bn">বাংলা (Bengali)</option>
+                        <option value="mr">मराठी (Marathi)</option>
+                        <option value="gu">ગુજરાતી (Gujarati)</option>
+                        <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+                        <option value="as">অসমীয়া (Assamese)</option>
+                        <option value="or">ଓଡ଼ିଆ (Odia)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="settingsCycleLength" data-lang-key="defaultCycleLengthLabel">Default Cycle Length (used for initial predictions)</label>
+                    <input type="number" id="settingsCycleLength" class="form-control" min="15" max="60">
+                </div>
+                <div class="form-group">
+                    <label for="settingsPeriodLength" data-lang-key="defaultPeriodLengthLabel">Default Period Length (used for initial predictions)</label>
+                    <input type="number" id="settingsPeriodLength" class="form-control" min="1" max="15">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="birthControlReminder"> <span data-lang-key="birthControlReminderLabel">Birth Control Reminder (daily pop-up)</span>
+                    </label>
+                </div>
+                <button onclick="updateSettings()" class="btn btn-primary" data-lang-key="updateSettingsButton">Update Settings</button>
+                <hr style="margin: 30px 0;">
+                <div class="data-management">
+                    <button onclick="exportData()" class="btn btn-secondary" data-lang-key="exportDataButton">📥 Export Data</button>
+                    <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData()">
+                    <button onclick="document.getElementById('importFile').click()" class="btn btn-secondary" data-lang-key="importDataButton">📤 Import Data</button>
+                    <button onclick="deleteAllData()" class="btn btn-danger" data-lang-key="deleteAllDataButton">🗑️ Delete All Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="notification" class="notification"></div>
+
+    <script>
+        const APP_DATA_KEY = 'oviaAppData_v3'; // Incremented version
+        const defaultAppData = {
+            password: '',
+            settings: {
+                cycleLength: 28,
+                periodDuration: 5,
+                birthControlReminder: false,
+                language: 'en' // Default language
+            },
+            periods: [], 
+            symptoms: {}, 
+            cycles: [] 
+        };
+
+        let appData = {}; // Will be populated by loadAppData
+        let currentLang = 'en'; // Will be updated
+        let currentDate = new Date(); 
+        currentDate.setHours(0, 0, 0, 0);
+        let currentView = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+        let cycleChartInstance = null;
+
+        // DOM Elements
+        const calendarGridEl = document.getElementById('calendarGrid');
+        const currentMonthEl = document.getElementById('currentMonth');
+        const notificationEl = document.getElementById('notification');
+        const symptomDateDisplayEl = document.getElementById('symptomDateDisplay');
+        const saveButtonDateDisplayEl = document.getElementById('saveButtonDateDisplay');
+        const authSectionEl = document.getElementById('authSection');
+        const mainAppEl = document.getElementById('mainApp');
+        const passwordInputEl = document.getElementById('password');
+        const lastPeriodInputEl = document.getElementById('lastPeriod');
+        const cycleLengthInputEl = document.getElementById('cycleLength');
+        const periodDurationInputEl = document.getElementById('periodDuration');
+        const notesInputEl = document.getElementById('notesInput');
+        const authButtonEl = document.getElementById('authButton');
+        const languageSelectEl = document.getElementById('languageSelect');
+        const authIntroPEl = document.getElementById('authIntroP');
+
+        const lastPeriodGroupEl = document.getElementById('lastPeriodGroup');
+        const cycleLengthGroupEl = document.getElementById('cycleLengthGroup');
+        const periodDurationGroupEl = document.getElementById('periodDurationGroup');
+
+
+        // --- Translations ---
+        // IMPORTANT: YOU NEED TO FILL IN ALL TRANSLATIONS FOR OTHER LANGUAGES
+        const translations = {
+            en: {
+                appSubtitle: "Your personal period tracking companion",
+                welcomeToOvia: "Welcome to Ovia",
+                setupIntro: "If you are a new user, please set up your details. If returning, please enter your password to login.",
+                loginIntro: "Please enter your password to login.",
+                enterPasswordLabel: "Set/Enter Your Password",
+                passwordPlaceholder: "Enter your password",
+                lastPeriodLabel: "Last Period Start Date",
+                cycleLengthLabel: "Typical Cycle Length (days)",
+                periodDurationLabel: "Typical Period Duration (days)",
+                startTrackingSetupButton: "Start Tracking / Setup",
+                loginButtonLabel: "Login",
+                calendarTab: "📅 Calendar", symptomsTab: "📝 Symptoms", insightsTab: "📊 Insights", settingsTab: "⚙️ Settings",
+                daysUntilNextPeriod: "Days until next period", currentCycleDay: "Current cycle day", avgCycleLengthCalendar: "Average cycle length",
+                legendTitle: "Legend", periodLegend: "Period", ovulationLegend: "Ovulation", fertileWindowLegend: "Fertile Window", predictedPeriodLegend: "Predicted Period",
+                logSymptomsFor: "Log Symptoms for", flowSymptom: "Flow", noneFlow: "None", spottingFlow: "Spotting", lightFlow: "Light", mediumFlow: "Medium", heavyFlow: "Heavy",
+                moodSymptom: "Mood", happyMood: "😊 Happy", sadMood: "😢 Sad", irritatedMood: "😤 Irritated", anxiousMood: "😰 Anxious", emotionalMood: "😭 Emotional", calmMood: "😌 Calm", energeticMood: "⚡ Energetic",
+                physicalSymptoms: "Physical Symptoms", crampsPhysical: "🤕 Cramps", bloatingPhysical: "🎈 Bloating", headachePhysical: "🤯 Headache", backachePhysical: "🔥 Back Pain", tenderPhysical: "💔 Breast Tenderness", fatiguePhysical: "😴 Fatigue", nauseaPhysical: "🤢 Nausea", acnePhysical: "痘 Acne",
+                dischargeSymptom: "Discharge", noneDischarge: "None", dryDischarge: "Dry", stickyDischarge: "Sticky", creamyDischarge: "Creamy", wateryDischarge: "Watery", eggWhiteDischarge: "Egg White",
+                notesSymptom: "Notes", notesPlaceholder: "Any additional notes for this day...", saveDataFor: "Save Data for",
+                yourCycleInsights: "Your Cycle Insights", cycleLengthTrends: "Cycle Length Trends",
+                cycleLengthInfoLabel: "Cycle Length Info", periodLengthInfoLabel: "Period Length Info", totalCyclesTracked: "Total Cycles Tracked",
+                predictionsTitle: "Predictions", nextPeriodPrediction: "Next Period:", nextOvulationPrediction: "Next Ovulation:", fertileWindowPrediction: "Fertile Window:",
+                chartNoDataDefault: "Not enough cycle data to display chart. Track at least two full cycles for a trend.",
+                chartNoDataNeedTwoPeriods: "Track at least two periods (and log flow) to calculate your first cycle length.",
+                chartNoDataNextPeriodCalculates: "Your first cycle length will be calculated once your next period starts. Log flow to mark it.",
+                chartNoDataNeedOneMoreCycle: "Track one more cycle to see trends in cycle length. Current cycle: {length} days.",
+                settingsTitle: "Settings & Data Management", languageSelectLabel: "Select Language:",
+                defaultCycleLengthLabel: "Default Cycle Length (used for initial predictions)", defaultPeriodLengthLabel: "Default Period Length (used for initial predictions)",
+                birthControlReminderLabel: "Birth Control Reminder (daily pop-up)",
+                updateSettingsButton: "Update Settings", exportDataButton: "📥 Export Data", importDataButton: "📤 Import Data", deleteAllDataButton: "🗑️ Delete All Data",
+                
+                // Notifications
+                passwordIncorrect: "Incorrect password. Please try again.",
+                loginSuccess: "Logged in successfully! 🌸",
+                setupSuccess: "Welcome to Ovia! 🌸 Setup complete.",
+                pleaseSetPasswordError: "Please set or enter your password.",
+                invalidLastPeriodError: "Please provide the last period start date.",
+                invalidCycleLengthError: "Invalid cycle length. Must be between 15-60.",
+                invalidPeriodDurationError: "Invalid period duration. Must be between 1-15.",
+                invalidLastPeriodFormatError: "Invalid last period date format.",
+                settingsUpdated: "Settings updated!",
+                dataExported: "Data exported!",
+                noFileSelectedError: "No file selected.",
+                invalidDataFileError: "Invalid data file format. Missing essential fields.",
+                dataImportedSuccess: "Data imported successfully! Re-initializing app...",
+                dataImportError: "Error importing data: {message}",
+                importedDataIncomplete: "Imported data seems incomplete. Please set up again.",
+                allDataDeleted: "All data deleted. Please set up the app again.",
+                periodExtended: "Period extended for {date}",
+                newPeriodStarted: "New period started on {date}",
+                periodDurationUpdated: "Period duration updated for {date}",
+                periodShortenedNoFlow: "Period for {date} shortened as no flow logged.",
+                birthControlReminder: "Reminder: Take your birth control pill! 💊",
+                periodUpcoming: "Your period is predicted to start {days_count} ({date}).", // days_count is "today" or "in X day(s)"
+                ovulationToday: "Today ({date}) is your predicted ovulation day! Consider logging symptoms.",
+                daysUnit: "days",
+                defaultLabel: "(default)",
+                avgLabel: "(avg, {count} {item_plural})", // item_plural can be "cycles" or "periods"
+                oneItemLabel: "({length} {days_unit}, 1 {item_singular})", // item_singular can be "cycle" or "period"
+                cyclesItemPlural: "cycles", periodsItemPlural: "periods",
+                cycleItemSingular: "cycle", periodItemSingular: "period",
+                dayHeaders: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], // For calendar
+                todayStr: "today",
+                inXDaysStr: "in {days} day(s)"
+            },
+            // --- START: Add your translations below for other languages ---
+            fr: { /* French translations - e.g., appSubtitle: "Votre compagnon personnel de suivi des règles", ... */ },
+            ar: { /* Arabic translations - e.g., appSubtitle: "رفيقك الشخصي لتتبع الدورة الشهرية", ... (Remember RTL) */ },
+            // ... Add ALL other languages here: es, zh, ja, ru, pt, de, it, ta, te, kn, ml, hi, bn, mr, gu, pa, as, or
+            // --- END: Translations ---
+        };
+        
+        function getTranslation(key, params = {}) {
+            const langSet = translations[currentLang] || translations.en;
+            let text = langSet[key] || translations.en[key] || `MISSING_KEY: ${key}`;
+            for (const pKey in params) {
+                text = text.replace(`{${pKey}}`, params[pKey]);
+            }
+            return text;
+        }
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                el.textContent = getTranslation(el.dataset.langKey);
+            });
+            document.querySelectorAll('[data-lang-placeholder-key]').forEach(el => {
+                el.placeholder = getTranslation(el.dataset.langPlaceholderKey);
+            });
+             // Handle RTL languages
+            if (currentLang === 'ar') { // Add other RTL languages if needed
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.documentElement.dir = 'ltr';
+            }
+            // Force update of any dynamically generated text that depends on language
+            if (mainAppEl.classList.contains('hidden') === false) { // Only if app is initialized
+                 updateAllViews(); // This will re-render calendar, stats, insights
+            }
+        }
+        
+        function changeLanguage(langCode) {
+            if (translations[langCode]) {
+                currentLang = langCode;
+                appData.settings.language = langCode;
+                languageSelectEl.value = langCode; // Ensure dropdown reflects change
+                saveAppData();
+                applyTranslations();
+            } else {
+                console.warn(`Language ${langCode} not found, defaulting to English.`);
+                currentLang = 'en';
+                appData.settings.language = 'en';
+                 languageSelectEl.value = 'en';
+                saveAppData();
+                applyTranslations();
+            }
+        }
+
+        // --- Initialization and Core App Flow ---
+        window.onload = () => {
+            appData = loadAppData();
+            currentLang = appData.settings.language || 'en'; // Set global currentLang
+            languageSelectEl.value = currentLang; // Set dropdown value
+
+            applyTranslations(); // Apply translations early for the auth screen
+
+            if (appData.password) { // Password is set, prompt for login
+                authIntroPEl.textContent = getTranslation('loginIntro');
+                authButtonEl.textContent = getTranslation('loginButtonLabel');
+                // Hide setup-specific fields
+                lastPeriodGroupEl.classList.add('hidden-for-login');
+                cycleLengthGroupEl.classList.add('hidden-for-login');
+                periodDurationGroupEl.classList.add('hidden-for-login');
+                passwordInputEl.value = ""; // Clear password field for security
+                passwordInputEl.focus();
+            } else { // No password, this is a first-time setup
+                authIntroPEl.textContent = getTranslation('setupIntro');
+                authButtonEl.textContent = getTranslation('startTrackingSetupButton');
+                lastPeriodGroupEl.classList.remove('hidden-for-login');
+                cycleLengthGroupEl.classList.remove('hidden-for-login');
+                periodDurationGroupEl.classList.remove('hidden-for-login');
+            }
+            authSectionEl.classList.remove('hidden');
+            mainAppEl.classList.add('hidden');
+        };
+        
+        function handleAuth() {
+            const password = passwordInputEl.value;
+            if (!password) {
+                showNotification('pleaseSetPasswordError', 'error');
+                return;
+            }
+
+            if (appData.password) { // Login attempt
+                if (password === appData.password) {
+                    authSectionEl.classList.add('hidden');
+                    mainAppEl.classList.remove('hidden');
+                    initializeApp();
+                    showNotification('loginSuccess', 'success');
+                } else {
+                    showNotification('passwordIncorrect', 'error');
+                }
+            } else { // First-time setup
+                const lastPeriodRaw = lastPeriodInputEl.value;
+                const cycleLength = parseInt(cycleLengthInputEl.value);
+                const periodDuration = parseInt(periodDurationInputEl.value);
+
+                if (!lastPeriodRaw) { showNotification('invalidLastPeriodError', 'error'); return; }
+                if (isNaN(cycleLength) || cycleLength < 15 || cycleLength > 60) { showNotification('invalidCycleLengthError', 'error'); return; }
+                if (isNaN(periodDuration) || periodDuration < 1 || periodDuration > 15) { showNotification('invalidPeriodDurationError', 'error'); return; }
+                
+                const lastPeriodDate = new Date(lastPeriodRaw + "T00:00:00");
+                if (isNaN(lastPeriodDate.getTime())) { showNotification('invalidLastPeriodFormatError', 'error'); return; }
+
+                appData.password = password;
+                appData.settings.cycleLength = cycleLength;
+                appData.settings.periodDuration = periodDuration;
+                appData.periods = [{ start: dateToYMD(lastPeriodDate), duration: periodDuration }];
+                appData.cycles = [];
+                
+                saveAppData();
+                authSectionEl.classList.add('hidden');
+                mainAppEl.classList.remove('hidden');
+                initializeApp();
+                showNotification('setupSuccess', 'success');
+            }
+        }
+
+        function initializeApp() {
+            currentView = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            loadSettings(); // Load into form fields
+            applyTranslations(); // Ensure all app elements are translated
+            updateAllViews();
+            checkReminders();
+            loadSymptomsForDate(dateToYMD(currentDate)); 
+            document.querySelector('.tab[onclick*="calendar"]')?.classList.add('active'); // Ensure calendar tab is active
+            document.getElementById('calendar')?.classList.add('active');
+        }
+
+        function updateAllViews() {
+            recalculateCycles(); 
+            updateCalendar();
+            updateStats();
+            updateInsights(); 
+            updateSymptomDateDisplays();
+        }
+        
+        function loadAppData() {
+            const storedData = localStorage.getItem(APP_DATA_KEY);
+            let loadedState = JSON.parse(JSON.stringify(defaultAppData)); 
+
+            if (storedData) {
+                try {
+                    const parsedData = JSON.parse(storedData);
+                    loadedState.password = parsedData.password || '';
+                    if (parsedData.settings) {
+                        loadedState.settings = { ...loadedState.settings, ...parsedData.settings };
+                    }
+                    if (parsedData.periods) { 
+                        loadedState.periods = parsedData.periods.map(p => ({
+                            start: p.start, duration: p.duration
+                        })).sort((a, b) => new Date(a.start) - new Date(b.start));
+                    }
+                    if (parsedData.cycles) { 
+                        loadedState.cycles = parsedData.cycles.map(c => ({
+                            startDate: c.startDate, endDate: c.endDate, length: c.length
+                        }));
+                    }
+                    if (parsedData.symptoms) loadedState.symptoms = parsedData.symptoms;
+                } catch (error) {
+                    console.error("Error loading data from localStorage:", error);
+                    localStorage.removeItem(APP_DATA_KEY); 
+                    return JSON.parse(JSON.stringify(defaultAppData));
+                }
+            }
+            return loadedState;
+        }
+
+        function saveAppData() {
+            appData.periods.sort((a, b) => new Date(a.start) - new Date(b.start));
+            localStorage.setItem(APP_DATA_KEY, JSON.stringify(appData));
+        }
+
+        function addDays(date, days) { 
+            const result = new Date(date); 
+            result.setDate(result.getDate() + days);
+            return result;
+        }
+        function dateToYMD(dateInstance) { 
+            if (!(dateInstance instanceof Date) || isNaN(dateInstance)) return '';
+            const y = dateInstance.getFullYear();
+            const m = String(dateInstance.getMonth() + 1).padStart(2, '0');
+            const d = String(dateInstance.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+        
+        function recalculateCycles() {
+            appData.periods.sort((a, b) => new Date(a.start) - new Date(b.start));
+            appData.cycles = [];
+            for (let i = 0; i < appData.periods.length - 1; i++) {
+                const currentPeriodStart = new Date(appData.periods[i].start);
+                const nextPeriodStart = new Date(appData.periods[i+1].start);
+                const cycleLength = Math.round((nextPeriodStart - currentPeriodStart) / (1000 * 60 * 60 * 24));
+                if (cycleLength > 0 && cycleLength < 100) { 
+                    appData.cycles.push({
+                        startDate: dateToYMD(currentPeriodStart),
+                        endDate: dateToYMD(addDays(nextPeriodStart, -1)),
+                        length: cycleLength
+                    });
+                }
+            }
+        }
+
+        function getNextPeriodInfo() {
+            if (appData.periods.length === 0) return null;
+            appData.periods.sort((a, b) => new Date(a.start) - new Date(b.start)); 
+            const lastPeriod = appData.periods[appData.periods.length - 1];
+            const lastPeriodStartDate = new Date(lastPeriod.start);
+            
+            let currentAvgCycleLength = appData.settings.cycleLength;
+            if (appData.cycles.length > 0) {
+                 const totalCycleDays = appData.cycles.reduce((sum, c) => sum + c.length, 0);
+                 currentAvgCycleLength = Math.round(totalCycleDays / appData.cycles.length);
+            }
+            const nextPeriodStartDate = addDays(lastPeriodStartDate, currentAvgCycleLength);
+            const ovulationDate = addDays(nextPeriodStartDate, -14); 
+            const fertileStart = addDays(ovulationDate, -5);
+            const fertileEnd = addDays(ovulationDate, 1); 
+
+            let avgPeriodDuration = appData.settings.periodDuration;
+            if (appData.periods.length > 0) {
+                avgPeriodDuration = Math.round(appData.periods.reduce((sum, p) => sum + p.duration, 0) / appData.periods.length);
+            }
+            return {
+                nextPeriodStartDate, ovulationDate, fertileStart, fertileEnd,
+                predictedCycleLength: currentAvgCycleLength,
+                predictedPeriodDuration: Math.max(1, Math.round(avgPeriodDuration))
+            };
+        }
+
+        function updateCalendar() {
+            if (!calendarGridEl || !currentMonthEl) return;
+            calendarGridEl.innerHTML = '';
+            // Use toLocaleDateString for month name localization based on currentLang
+            const options = { month: 'long', year: 'numeric' };
+            try {
+                currentMonthEl.textContent = currentView.toLocaleDateString(currentLang, options);
+            } catch (e) { // Fallback if language code is not recognized by toLocaleDateString
+                currentMonthEl.textContent = currentView.toLocaleDateString('en', options);
+            }
+
+
+            const year = currentView.getFullYear();
+            const month = currentView.getMonth();
+            const firstDayOfMonth = new Date(year, month, 1);
+            const lastDayOfMonth = new Date(year, month + 1, 0);
+            const daysInMonth = lastDayOfMonth.getDate();
+            const startingDayOfWeek = (firstDayOfMonth.getDay() === 0) ? 0 : firstDayOfMonth.getDay();
+
+            const dayHeaders = getTranslation('dayHeaders'); // Array from translations
+            dayHeaders.forEach(headerText => {
+                const headerEl = document.createElement('div');
+                headerEl.classList.add('day-header');
+                headerEl.textContent = headerText;
+                calendarGridEl.appendChild(headerEl);
+            });
+
+            for (let i = 0; i < startingDayOfWeek; i++) {
+                calendarGridEl.appendChild(document.createElement('div')).classList.add('day', 'other-month');
+            }
+
+            const predictions = getNextPeriodInfo();
+            const todayYMD = dateToYMD(new Date());
+            const currentYMD = dateToYMD(currentDate);
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayCell = document.createElement('div');
+                dayCell.classList.add('day');
+                dayCell.textContent = day;
+                const cellDate = new Date(year, month, day); cellDate.setHours(0,0,0,0);
+                const cellDateYMD = dateToYMD(cellDate);
+
+                if (cellDateYMD === todayYMD) dayCell.classList.add('today');
+                if (cellDateYMD === currentYMD) dayCell.classList.add('selected-date');
+
+                let isPeriodDay = false;
+                for (const period of appData.periods) {
+                    const periodStart = new Date(period.start); periodStart.setHours(0,0,0,0);
+                    const periodEnd = addDays(periodStart, period.duration - 1);
+                    if (cellDate >= periodStart && cellDate <= periodEnd) { isPeriodDay = true; break; }
+                }
+
+                if (isPeriodDay) {
+                    dayCell.classList.add('period');
+                } else if (predictions) { 
+                    if (cellDateYMD === dateToYMD(predictions.ovulationDate)) dayCell.classList.add('ovulation');
+                    else if (cellDate >= predictions.fertileStart && cellDate <= predictions.fertileEnd) dayCell.classList.add('fertile');
+                    
+                    const predPeriodStart = predictions.nextPeriodStartDate;
+                    const predPeriodEnd = addDays(predPeriodStart, predictions.predictedPeriodDuration - 1);
+                    if (cellDate >= predPeriodStart && cellDate <= predPeriodEnd) dayCell.classList.add('predicted'); 
+                }
+                dayCell.onclick = () => handleDateClick(cellDate);
+                calendarGridEl.appendChild(dayCell);
+            }
+        }
+        
+        function handleDateClick(date) {
+            currentDate = new Date(date); currentDate.setHours(0,0,0,0);
+            loadSymptomsForDate(dateToYMD(currentDate)); 
+            updateCalendar(); 
+            updateSymptomDateDisplays();
+        }
+        function previousMonth() { currentView.setMonth(currentView.getMonth() - 1); updateCalendar(); }
+        function nextMonth() { currentView.setMonth(currentView.getMonth() + 1); updateCalendar(); }
+
+        function updateStats() { 
+            const predictions = getNextPeriodInfo();
+            const nextPeriodDaysEl = document.getElementById('nextPeriodDays');
+            const cycleDayEl = document.getElementById('cycleDay');
+            const avgCycleDisplayEl = document.getElementById('avgCycle');
+
+            if (predictions) {
+                const todayVal = new Date(); todayVal.setHours(0,0,0,0);
+                const diffTime = predictions.nextPeriodStartDate - todayVal;
+                const diffDays = Math.max(0, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
+                if(nextPeriodDaysEl) nextPeriodDaysEl.textContent = diffDays;
+            } else {
+                if(nextPeriodDaysEl) nextPeriodDaysEl.textContent = '-';
+            }
+
+            if (appData.periods.length > 0) {
+                const lastP = appData.periods[appData.periods.length - 1];
+                const lastPeriodStartDate = new Date(lastP.start); lastPeriodStartDate.setHours(0,0,0,0);
+                const todayVal = new Date(); todayVal.setHours(0,0,0,0);
+                const currentCycleDay = Math.floor((todayVal - lastPeriodStartDate) / (1000 * 60 * 60 * 24)) + 1;
+                if(cycleDayEl) cycleDayEl.textContent = currentCycleDay > 0 ? currentCycleDay : "-";
+            } else {
+                if(cycleDayEl) cycleDayEl.textContent = '-';
+            }
+            
+            let avgCycleLenText = `${appData.settings.cycleLength} ${getTranslation('daysUnit')}`;
+            let avgCycleLabel = getTranslation('defaultLabel');
+            if (appData.cycles.length > 0) {
+                const totalCycleDays = appData.cycles.reduce((sum, cycle) => sum + cycle.length, 0);
+                avgCycleLenText = `${Math.round(totalCycleDays / appData.cycles.length)} ${getTranslation('daysUnit')}`;
+                if (appData.cycles.length === 1) {
+                    avgCycleLabel = getTranslation('oneItemLabel', {length: appData.cycles[0].length, days_unit: getTranslation('daysUnit'), item_singular: getTranslation('cycleItemSingular')});
+                } else {
+                    avgCycleLabel = getTranslation('avgLabel', {count: appData.cycles.length, item_plural: getTranslation('cyclesItemPlural')});
+                }
+            }
+            if(avgCycleDisplayEl) avgCycleDisplayEl.textContent = `${avgCycleLenText} ${avgCycleLabel}`;
+        }
+
+        function updateSymptomDateDisplays() {
+            const displayDate = dateToYMD(currentDate);
+            if(symptomDateDisplayEl) symptomDateDisplayEl.textContent = displayDate;
+            if(saveButtonDateDisplayEl) saveButtonDateDisplayEl.textContent = displayDate;
+        }
+        
+        function loadSymptomsForDate(dateKey) {
+            let currentDaySymptoms;
+            if (appData.symptoms[dateKey]) {
+                currentDaySymptoms = JSON.parse(JSON.stringify(appData.symptoms[dateKey]));
+            } else {
+                currentDaySymptoms = { date: dateKey, flow: '', mood: [], physical: [], discharge: [], notes: '' };
+            }
+            updateSymptomUI(currentDaySymptoms);
+            updateSymptomDateDisplays();
+        }
+
+        function updateSymptomUI(symptomsData) {
+            document.querySelectorAll('.symptom-group[data-symptom-category="flow"] .flow-option').forEach(opt => {
+                opt.classList.remove('selected');
+                if (opt.dataset.value === symptomsData.flow) opt.classList.add('selected');
+            });
+            ['mood', 'physical', 'discharge'].forEach(category => {
+                document.querySelectorAll(`.symptom-group[data-symptom-category="${category}"] .symptom-option`).forEach(opt => {
+                    opt.classList.remove('selected');
+                    if (symptomsData[category] && symptomsData[category].includes(opt.dataset.value)) opt.classList.add('selected');
+                });
+            });
+            if (notesInputEl) notesInputEl.value = symptomsData.notes || '';
+        }
+        
+        function toggleSymptom(element) { element.classList.toggle('selected'); }
+        function selectFlow(flowValue, element) {
+            element.parentElement.querySelectorAll('.flow-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function saveSymptoms() {
+            const logDateKey = dateToYMD(currentDate);
+            let symptomsToSave = { date: logDateKey, flow: '', mood: [], physical: [], discharge: [], notes: notesInputEl ? notesInputEl.value.trim() : '' };
+
+            const selectedFlowEl = document.querySelector('.symptom-group[data-symptom-category="flow"] .flow-option.selected');
+            if (selectedFlowEl) symptomsToSave.flow = selectedFlowEl.dataset.value;
+
+            ['mood', 'physical', 'discharge'].forEach(category => {
+                document.querySelectorAll(`.symptom-group[data-symptom-category="${category}"] .symptom-option.selected`).forEach(opt => {
+                    symptomsToSave[category].push(opt.dataset.value);
+                });
+            });
+            appData.symptoms[logDateKey] = symptomsToSave;
+
+            if (symptomsToSave.flow && symptomsToSave.flow !== 'none' && symptomsToSave.flow !== 'spotting') {
+                const symptomDate = new Date(currentDate); symptomDate.setHours(0,0,0,0);
+                let periodIndex = appData.periods.findIndex(p => {
+                    const pStart = new Date(p.start); const pEnd = addDays(pStart, p.duration -1);
+                    return symptomDate >= pStart && symptomDate <= pEnd;
+                });
+                if (periodIndex === -1) { 
+                    let newPeriod = true;
+                    for(let i=0; i < appData.periods.length; i++) {
+                        const pStart = new Date(appData.periods[i].start); const pEnd = addDays(pStart, appData.periods[i].duration -1);
+                        if(dateToYMD(addDays(pEnd,1)) === dateToYMD(symptomDate)){
+                            appData.periods[i].duration +=1; newPeriod = false;
+                            showNotification('periodExtended', 'info', {date: dateToYMD(pStart)}); break;
+                        }
+                    }
+                    if(newPeriod){ appData.periods.push({ start: dateToYMD(symptomDate), duration: 1 });
+                        showNotification('newPeriodStarted', 'success', {date: dateToYMD(symptomDate)});
+                    }
+                } else {
+                    const p = appData.periods[periodIndex]; const pStart = new Date(p.start);
+                    const daysFromStart = Math.round((symptomDate - pStart) / (1000 * 60 * 60 * 24)) + 1;
+                    if (daysFromStart > p.duration) { p.duration = daysFromStart;
+                        showNotification('periodDurationUpdated', 'info', {date: dateToYMD(pStart)});
+                    }
+                }
+            } else if (symptomsToSave.flow === 'none' || symptomsToSave.flow === 'spotting') {
+                const symptomDateYMD = dateToYMD(currentDate);
+                for (let i = 0; i < appData.periods.length; i++) {
+                    const p = appData.periods[i]; const pStart = new Date(p.start);
+                    const pEnd = addDays(pStart, p.duration - 1);
+                    if (symptomDateYMD === dateToYMD(pEnd) && p.duration > 1 && dateToYMD(pStart) !== symptomDateYMD) {
+                        p.duration -=1;
+                        showNotification('periodShortenedNoFlow', 'info', {date: dateToYMD(pStart)}); break; 
+                    }
+                }
+            }
+            saveAppData();
+            showNotification('saveDataFor', 'success', {date: logDateKey}); // Example of param, though this key doesn't take one.
+            updateAllViews(); 
+        }
+
+        function updateInsights() {
+            const predictions = getNextPeriodInfo();
+            const nextPeriodDateEl = document.getElementById('nextPeriodDate');
+            const nextOvulationDateEl = document.getElementById('nextOvulationDate');
+            const fertileWindowEl = document.getElementById('fertileWindow');
+            const avgCycleInsightEl = document.getElementById('avgCycleInsight');
+            const avgPeriodInsightEl = document.getElementById('avgPeriodInsight');
+            const totalCyclesEl = document.getElementById('totalCycles');
+
+            if (predictions) {
+                if(nextPeriodDateEl) nextPeriodDateEl.textContent = dateToYMD(predictions.nextPeriodStartDate);
+                if(nextOvulationDateEl) nextOvulationDateEl.textContent = dateToYMD(predictions.ovulationDate);
+                if(fertileWindowEl) fertileWindowEl.textContent = `${dateToYMD(predictions.fertileStart)} ${getTranslation('toKeyword') || 'to'} ${dateToYMD(predictions.fertileEnd)}`;
+            } else {
+                if(nextPeriodDateEl) nextPeriodDateEl.textContent = '-';
+                if(nextOvulationDateEl) nextOvulationDateEl.textContent = '-';
+                if(fertileWindowEl) fertileWindowEl.textContent = '-';
+            }
+
+            let avgCycleLen = appData.settings.cycleLength;
+            let avgCycleText = `${avgCycleLen} ${getTranslation('daysUnit')} ${getTranslation('defaultLabel')}`;
+            if (appData.cycles.length > 0) {
+                const totalCycleDays = appData.cycles.reduce((sum, cycle) => sum + cycle.length, 0);
+                avgCycleLen = Math.round(totalCycleDays / appData.cycles.length);
+                let label;
+                if (appData.cycles.length === 1) {
+                    label = getTranslation('oneItemLabel', {length: appData.cycles[0].length, days_unit: getTranslation('daysUnit'), item_singular: getTranslation('cycleItemSingular')});
+                } else {
+                    label = getTranslation('avgLabel', {count: appData.cycles.length, item_plural: getTranslation('cyclesItemPlural')});
+                }
+                avgCycleText = `${avgCycleLen} ${getTranslation('daysUnit')} ${label}`;
+            }
+            if(avgCycleInsightEl) avgCycleInsightEl.textContent = avgCycleText;
+
+            let avgPeriodDur = appData.settings.periodDuration;
+            let avgPeriodText = `${avgPeriodDur} ${getTranslation('daysUnit')} ${getTranslation('defaultLabel')}`;
+            if (appData.periods.length > 0) {
+                const totalPDays = appData.periods.reduce((sum, p) => sum + p.duration, 0);
+                avgPeriodDur = Math.max(1, Math.round(totalPDays / appData.periods.length));
+                let label;
+                 if (appData.periods.length === 1) {
+                    label = getTranslation('oneItemLabel', {length: appData.periods[0].duration, days_unit: getTranslation('daysUnit'), item_singular: getTranslation('periodItemSingular')});
+                } else {
+                     label = getTranslation('avgLabel', {count: appData.periods.length, item_plural: getTranslation('periodsItemPlural')});
+                }
+                avgPeriodText = `${avgPeriodDur} ${getTranslation('daysUnit')} ${label}`;
+            }
+            if(avgPeriodInsightEl) avgPeriodInsightEl.textContent = avgPeriodText;
+            if(totalCyclesEl) totalCyclesEl.textContent = appData.cycles.length;
+            updateInsightsChart();
+        }
+
+        function updateInsightsChart() {
+            const cycleChartCtx = document.getElementById('cycleChart')?.getContext('2d');
+            const noDataEl = document.getElementById('cycleChartNoData');
+            const canvasEl = document.getElementById('cycleChart');
+
+            if (!cycleChartCtx || !noDataEl || !canvasEl) return;
+            if (cycleChartInstance) cycleChartInstance.destroy(); cycleChartInstance = null; 
+            
+            if (appData.cycles.length < 2) { 
+                canvasEl.style.display = 'none'; noDataEl.style.display = 'block';
+                if (appData.periods.length < 2) noDataEl.textContent = getTranslation('chartNoDataNeedTwoPeriods');
+                else if (appData.cycles.length < 1) noDataEl.textContent = getTranslation('chartNoDataNextPeriodCalculates');
+                else noDataEl.textContent = getTranslation('chartNoDataNeedOneMoreCycle', {length: appData.cycles[0].length});
+                return;
+            }
+            canvasEl.style.display = 'block'; noDataEl.style.display = 'none';
+
+            const labels = appData.cycles.map((cycle, index) => `${getTranslation('cycleItemSingular')} ${index + 1} (${cycle.startDate.substring(5)})`);
+            const data = appData.cycles.map(cycle => cycle.length);
+
+            cycleChartInstance = new Chart(cycleChartCtx, {
+                type: 'line',
+                data: { labels: labels, datasets: [{
+                    label: getTranslation('cycleLengthTrends'), data: data,
+                    borderColor: 'var(--primary)', backgroundColor: 'rgba(236, 72, 153, 0.1)', fill: true, tension: 0.2 
+                }]},
+                options: { responsive: true, maintainAspectRatio: false,
+                    scales: { 
+                        y: { beginAtZero: false, title: { display: true, text: getTranslation('daysUnit')}},
+                        x: { title: { display: true, text: `${getTranslation('cycleItemSingular')} (${getTranslation('startDateAbbr') || 'Start Date MM-DD'})`}} // Add startDateAbbr to translations
+                    },
+                    plugins: { legend: { display: data.length > 0, position: 'top' },
+                        tooltip: { callbacks: {
+                            title: (tooltipItems) => {
+                                const cycleIndex = tooltipItems[0].dataIndex; const cycle = appData.cycles[cycleIndex];
+                                return `${getTranslation('cycleItemSingular')} ${cycleIndex + 1}: ${cycle.startDate} ${getTranslation('toKeyword') || 'to'} ${cycle.endDate || getTranslation('ongoingKeyword') || 'Ongoing'}`; // Add toKeyword and ongoingKeyword
+                            },
+                            label: (context) => `${context.dataset.label || ''}: ${context.parsed.y !== null ? context.parsed.y + ' ' + getTranslation('daysUnit') : ''}`
+                        }}
+                    }
+                }
+            });
+        }
+        
+        function loadSettings() {
+            document.getElementById('settingsCycleLength').value = appData.settings.cycleLength;
+            document.getElementById('settingsPeriodLength').value = appData.settings.periodDuration;
+            document.getElementById('birthControlReminder').checked = appData.settings.birthControlReminder;
+            languageSelectEl.value = appData.settings.language || 'en';
+        }
+
+        function updateSettings() {
+            const newCycleLength = parseInt(document.getElementById('settingsCycleLength').value);
+            const newPeriodLength = parseInt(document.getElementById('settingsPeriodLength').value);
+            if (isNaN(newCycleLength) || newCycleLength < 15 || newCycleLength > 60) { showNotification('invalidCycleLengthError', 'error'); return; }
+            if (isNaN(newPeriodLength) || newPeriodLength < 1 || newPeriodLength > 15) { showNotification('invalidPeriodDurationError', 'error'); return; }
+
+            appData.settings.cycleLength = newCycleLength;
+            appData.settings.periodDuration = newPeriodLength;
+            appData.settings.birthControlReminder = document.getElementById('birthControlReminder').checked;
+            // Language is updated by its own handler 'changeLanguage'
+            saveAppData();
+            showNotification('settingsUpdated', 'success');
+            updateAllViews(); 
+            if (appData.settings.birthControlReminder) checkReminders(); 
+        }
+
+        function exportData() {
+            const jsonData = JSON.stringify(appData, null, 2);
+            const blob = new Blob([jsonData], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'ovia_data.json';
+            document.body.appendChild(a); a.click();
+            document.body.removeChild(a); URL.revokeObjectURL(url);
+            showNotification('dataExported', 'success');
+        }
+
+        function importData() {
+            const fileInput = document.getElementById('importFile');
+            const file = fileInput.files[0];
+            if (!file) { showNotification('noFileSelectedError', 'error'); return; }
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    const importedRawData = JSON.parse(event.target.result);
+                    if (!importedRawData.settings || typeof importedRawData.password === 'undefined') {
+                         showNotification('invalidDataFileError', 'error'); return;
+                    }
+                    let newAppData = JSON.parse(JSON.stringify(defaultAppData)); 
+                    newAppData.password = importedRawData.password || '';
+                    if(importedRawData.settings) newAppData.settings = {...newAppData.settings, ...importedRawData.settings};
+                    if (importedRawData.periods && Array.isArray(importedRawData.periods)) {
+                        newAppData.periods = importedRawData.periods.map(p => ({
+                            start: p.start, duration: parseInt(p.duration) || defaultAppData.settings.periodDuration
+                        })).filter(p => p.start && !isNaN(new Date(p.start).getTime()) && p.duration > 0)
+                          .sort((a,b) => new Date(a.start) - new Date(b.start));
+                    }
+                    if(importedRawData.symptoms) newAppData.symptoms = importedRawData.symptoms;
+                    appData = newAppData; 
+                    currentLang = appData.settings.language || 'en'; // Update currentLang from imported data
+                    languageSelectEl.value = currentLang;
+                    saveAppData();
+                    showNotification('dataImportedSuccess', 'success');
+                    currentDate = new Date(); currentDate.setHours(0,0,0,0);
+                    currentView = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                    
+                    // No automatic login after import, user must still enter password.
+                    authSectionEl.classList.remove('hidden');
+                    mainAppEl.classList.add('hidden');
+                    window.onload(); // Re-run onload to set up auth screen correctly based on new appData
+
+                } catch (e) {
+                    showNotification('dataImportError', 'error', {message: e.message});
+                    console.error("Import error:", e);
+                } finally { fileInput.value = ''; }
+            };
+            reader.readAsText(file);
+        }
+
+        function deleteAllData() {
+            // Add a translated confirm message
+            if (confirm(getTranslation('confirmDeleteAllData') || 'Are you sure you want to delete ALL data from this browser? This cannot be undone.')) {
+                localStorage.removeItem(APP_DATA_KEY);
+                appData = JSON.parse(JSON.stringify(defaultAppData)); 
+                currentLang = appData.settings.language; // Reset language to default from appData
+                
+                currentDate = new Date(); currentDate.setHours(0,0,0,0);
+                currentView = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                showNotification('allDataDeleted', 'success');
+                
+                // Reset to auth screen, effectively logging out and requiring setup/login.
+                mainAppEl.classList.add('hidden');
+                authSectionEl.classList.remove('hidden');
+                window.onload(); // Re-run to set up auth screen correctly
+                
+                if (cycleChartInstance) cycleChartInstance.destroy();
+                if (calendarGridEl) calendarGridEl.innerHTML = '';
+                // Minimal UI clear, as window.onload will re-render auth screen
+            }
+        }
+
+        function showTab(tabName, event) {
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            
+            if(event && event.target) event.target.closest('.tab').classList.add('active');
+            else document.querySelector(`.tab[onclick*="'${tabName}'"]`)?.classList.add('active');
+
+            if (tabName === 'symptoms') { loadSymptomsForDate(dateToYMD(currentDate)); updateSymptomDateDisplays(); }
+            if (tabName === 'insights') updateInsights(); // updateInsights calls updateInsightsChart
+        }
+        
+        let notificationTimeout;
+        function showNotification(translationKey, type = 'info', params = {}) {
+            if (!notificationEl) return;
+            clearTimeout(notificationTimeout); 
+            notificationEl.textContent = getTranslation(translationKey, params);
+            notificationEl.className = 'notification'; 
+            if (type === 'success') notificationEl.style.borderLeftColor = 'var(--success)';
+            else if (type === 'error') notificationEl.style.borderLeftColor = 'var(--error)';
+            else if (type === 'warning') notificationEl.style.borderLeftColor = 'var(--warning)';
+            else notificationEl.style.borderLeftColor = 'var(--primary)';
+            notificationEl.classList.add('show');
+            notificationTimeout = setTimeout(() => { notificationEl.classList.remove('show'); }, 3500);
+        }
+
+        function checkReminders() {
+            const today = new Date(); today.setHours(0,0,0,0);
+            const predictions = getNextPeriodInfo();
+
+            if (predictions) {
+                const daysToPeriod = Math.ceil((predictions.nextPeriodStartDate - today) / (1000 * 60 * 60 * 24));
+                if (daysToPeriod >= 0 && daysToPeriod <= 2) { 
+                    const daysCountStr = daysToPeriod === 0 ? getTranslation('todayStr') : getTranslation('inXDaysStr', {days: daysToPeriod});
+                    showNotification('periodUpcoming', 'info', {days_count: daysCountStr, date: dateToYMD(predictions.nextPeriodStartDate)});
+                }
+                if (dateToYMD(predictions.ovulationDate) === dateToYMD(today)) {
+                    showNotification('ovulationToday', 'info', {date: dateToYMD(today)});
+                }
+            }
+            if (appData.settings.birthControlReminder) {
+                const lastReminderKey = 'birthControlReminderLastShown_v2'; // Keep versioning if logic changes
+                const lastReminderDate = localStorage.getItem(lastReminderKey);
+                if (lastReminderDate !== dateToYMD(today)) { 
+                    showNotification('birthControlReminder', 'warning');
+                    localStorage.setItem(lastReminderKey, dateToYMD(today));
+                }
+            }
+        }
+    </script>
+</body>
+</html>
